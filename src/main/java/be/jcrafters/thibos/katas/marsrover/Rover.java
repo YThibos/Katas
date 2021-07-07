@@ -55,11 +55,40 @@ public class Rover {
 	}
 
 	private void moveForward() {
-		if (coordinate.getY() + 1 > 4) {
-			coordinate = new Coordinate(coordinate.getX(), 0);
-		} else {
-			coordinate = new Coordinate(coordinate.getX(), coordinate.getY() + 1);
+		switch (direction) {
+		case NORTH:
+			if (coordinate.getY() + 1 > 4) {
+				coordinate = new Coordinate(coordinate.getX(), 0);
+			} else {
+				coordinate = new Coordinate(coordinate.getX(), coordinate.getY() + 1);
+			}
+			break;
+
+		case EAST:
+			if (coordinate.getX() + 1 > 4) {
+				coordinate = new Coordinate(0, coordinate.getY());
+			} else {
+				coordinate = new Coordinate(coordinate.getX() + 1, coordinate.getY());
+			}
+			break;
+
+		case SOUTH:
+			if (coordinate.getY() - 1 < 0) {
+				coordinate = new Coordinate(coordinate.getX(), 4);
+			} else {
+				coordinate = new Coordinate(coordinate.getX(), coordinate.getY() - 1);
+			}
+			break;
+
+		case WEST:
+			if (coordinate.getX() - 1 < 0) {
+				coordinate = new Coordinate(4, coordinate.getY());
+			} else {
+				coordinate = new Coordinate(coordinate.getX() - 1, coordinate.getY());
+			}
+			break;
 		}
+
 	}
 
 	private void rotateLeft() {

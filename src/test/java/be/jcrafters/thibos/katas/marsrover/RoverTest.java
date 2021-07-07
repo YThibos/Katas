@@ -68,12 +68,12 @@ public class RoverTest {
 		assertThat(actualResult).isEqualTo(expectedResult);
 	}
 
-	@Test
-	void whenNewRover_rotatesRightTwice_shouldReturnCorrectOrientation() {
-		rover.executeCommands("r");
-		String result = rover.executeCommands("r");
+	@ParameterizedTest
+	@CsvSource({"rf, 1:0:E"
+			   })
+	void whenNewRover_givenMixedCommands(String commands, String expectedResult) {
+		String actualResult = rover.executeCommands(commands);
 
-		assertThat(result).isEqualTo("0:0:S");
+		assertThat(actualResult).isEqualTo(expectedResult);
 	}
-
 }
