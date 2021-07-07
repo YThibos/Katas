@@ -42,4 +42,12 @@ public class RoverTest {
 		assertThat(result).isEqualTo("0:0:N");
 	}
 
+	@Test
+	void whenNewRover_getNullCommandString_shouldDoNothing() {
+		Rover rover = new Rover();
+
+		String result = rover.executeCommands(null);
+
+		assertThat(result).isEqualTo("0:0:N");
+	}
 }

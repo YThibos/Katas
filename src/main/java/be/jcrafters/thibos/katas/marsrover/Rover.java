@@ -1,12 +1,14 @@
 package be.jcrafters.thibos.katas.marsrover;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
 public class Rover {
 
 	private String position = "0:0:N";
 
 	public String executeCommands(String commands) {
 
-		if (commands.isBlank()) {
+		if (isBlank(commands)) {
 			return position;
 		}
 
@@ -14,7 +16,6 @@ public class Rover {
 		case "r":
 			return "0:0:E";
 		case "rr":
-			;
 			return "0:0:S";
 		default:
 			return "0:0:W";
