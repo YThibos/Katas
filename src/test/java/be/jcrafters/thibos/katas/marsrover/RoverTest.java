@@ -69,7 +69,10 @@ public class RoverTest {
 	}
 
 	@ParameterizedTest
-	@CsvSource({"rf, 1:0:E"
+	@CsvSource({"rf, 1:0:E",
+				"rrf, 0:4:S",
+				"rrrf, 4:0:W",
+				"rrfrf, 4:4:W"
 			   })
 	void whenNewRover_givenMixedCommands(String commands, String expectedResult) {
 		String actualResult = rover.executeCommands(commands);
