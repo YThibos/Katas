@@ -14,4 +14,22 @@ public class RoverTest {
 
 		assertThat(result).isEqualTo("0:0:E");
 	}
+
+	@Test
+	void whenNewRover_rotateRightTwice_shouldDoOneEightyDegreesTurn() {
+		Rover rover = new Rover();
+
+		String result = rover.executeCommands("rr");
+
+		assertThat(result).isEqualTo("0:0:S");
+	}
+
+	@Test
+	void whenNewRover_rotateLeft_shouldReturnCorrectOrientation() {
+		Rover rover = new Rover();
+
+		String result = rover.executeCommands("l");
+
+		assertThat(result).isEqualTo("0:0:W");
+	}
 }
