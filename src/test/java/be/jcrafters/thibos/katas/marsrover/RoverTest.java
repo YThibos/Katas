@@ -31,8 +31,11 @@ public class RoverTest {
 	}
 
 	@ParameterizedTest
-	@CsvSource({"f, 1:0:N",
-				"ff, 2:0:N"
+	@CsvSource({"f, 0:1:N",
+				"ff, 0:2:N",
+				"fff, 0:3:N",
+				"ffff, 0:4:N",
+				"fffff, 0:0:N"
 			   })
 	void whenNewRover_moveForward_shouldReturnCorrectCoordinates(String commands, String expectedResult) {
 		String result = rover.executeCommands(commands);
