@@ -17,6 +17,8 @@ public class Rover {
 			return "0:0:E";
 		case "rr":
 			return "0:0:S";
+		case "f":
+			return "1:0:N";
 		default:
 			return "0:0:W";
 		}
