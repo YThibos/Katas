@@ -48,7 +48,8 @@ public class RoverTest {
 	@CsvSource({"r, 0:0:E",
 				"rr, 0:0:S",
 				"rrr, 0:0:W",
-				"rrrr, 0:0:N"})
+				"rrrr, 0:0:N",
+				"rrrrr, 0:0:E"})
 	void whenNewRover_rotateRight_variousNumberOfRotations(String commands, String expectedResult) {
 		String actualResult = rover.executeCommands(commands);
 

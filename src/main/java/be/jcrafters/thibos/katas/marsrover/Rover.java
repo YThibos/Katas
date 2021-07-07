@@ -15,36 +15,35 @@ public class Rover {
 
 		if (isNotBlank(commands)) {
 
-			switch (commands) {
-			case "l":
-				if (direction.equals(NORTH)) {
-					direction = WEST;
+			for (char command : commands.toCharArray()) {
+
+				switch (command) {
+				case 'l':
+					if (direction.equals(NORTH)) {
+						direction = WEST;
+					}
+					break;
+
+				case 'f':
+					position = "1:0";
+					break;
+
+				case 'r':
+
+					if (NORTH.equals(direction)) {
+						direction = EAST;
+					} else if (EAST.equals(direction)) {
+						direction = SOUTH;
+					} else if (SOUTH.equals(direction)) {
+						direction = WEST;
+					} else if (WEST.equals(direction)) {
+						direction = NORTH;
+					}
+					break;
+
 				}
-				break;
-
-			case "f":
-				position = "1:0";
-				break;
-
-			case "r":
-				if (NORTH.equals(direction)) {
-					direction = EAST;
-				} else if (EAST.equals(direction)) {
-					direction = SOUTH;
-				}
-				break;
-
-			case "rr":
-				direction = SOUTH;
-				break;
-
-			case "rrr":
-				direction = WEST;
-				break;
 			}
 		}
-
 		return position + ":" + direction;
 	}
-
 }
