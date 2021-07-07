@@ -8,7 +8,9 @@ public class Rover {
 	private static final String WEST = "W";
 	private static final String EAST = "E";
 	private static final String SOUTH = "S";
-	private String position = "0:0";
+	private int x = 0;
+	private int y = 0;
+
 	private String direction = NORTH;
 
 	public String executeCommands(String commands) {
@@ -23,7 +25,7 @@ public class Rover {
 					break;
 
 				case 'f':
-					position = "1:0";
+					x = ++x;
 					break;
 
 				case 'r':
@@ -32,7 +34,11 @@ public class Rover {
 				}
 			}
 		}
-		return position + ":" + direction;
+		return formattedStatus();
+	}
+
+	private String formattedStatus() {
+		return x + ":" + y + ":" + direction;
 	}
 
 	private void rotateLeft() {

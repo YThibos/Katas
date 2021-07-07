@@ -30,11 +30,14 @@ public class RoverTest {
 		assertThat(result).isEqualTo("0:0:N");
 	}
 
-	@Test
-	void whenNewRover_moveForward_shouldReturnCorrectCoordinates() {
-		String result = rover.executeCommands("f");
+	@ParameterizedTest
+	@CsvSource({"f, 1:0:N",
+				"ff, 2:0:N"
+			   })
+	void whenNewRover_moveForward_shouldReturnCorrectCoordinates(String commands, String expectedResult) {
+		String result = rover.executeCommands(commands);
 
-		assertThat(result).isEqualTo("1:0:N");
+		assertThat(result).isEqualTo(expectedResult);
 	}
 
 	@ParameterizedTest
