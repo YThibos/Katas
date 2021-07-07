@@ -17,20 +17,6 @@ public class RoverTest {
 	}
 
 	@Test
-	void whenNewRover_rotateRight_shouldReturnCorrectOrientation() {
-		String result = rover.executeCommands("r");
-
-		assertThat(result).isEqualTo("0:0:E");
-	}
-
-	@Test
-	void whenNewRover_rotateRightTwice_shouldDoOneEightyDegreesTurn() {
-		String result = rover.executeCommands("rr");
-
-		assertThat(result).isEqualTo("0:0:S");
-	}
-
-	@Test
 	void whenNewRover_rotateLeft_shouldReturnCorrectOrientation() {
 		String result = rover.executeCommands("l");
 
@@ -45,7 +31,7 @@ public class RoverTest {
 	}
 
 	@Test
-	void whenNewRover_getNullCommandString_shouldDoNothing() {
+	void whenNewRover_getsNullCommand_shouldDoNothing() {
 		String result = rover.executeCommands(null);
 
 		assertThat(result).isEqualTo("0:0:N");
