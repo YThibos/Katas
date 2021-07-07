@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class RoverTest {
 
 	@Test
-	void givethisanamelater() {
+	void whenNewRover_rotateRight_shouldReturnCorrectOrientation() {
 		Rover rover = new Rover();
 
 		String result = rover.executeCommands("r");
