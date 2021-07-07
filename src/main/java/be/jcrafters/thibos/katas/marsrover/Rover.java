@@ -9,23 +9,7 @@ public class Rover {
 	private static final String EAST = "E";
 	private static final String SOUTH = "S";
 
-	private static class Coordinate {
-		private final int x;
-		private final int y;
-
-		public Coordinate(int x, int y) {
-			this.x = x;
-			this.y = y;
-		}
-
-		public int getX() {
-			return x;
-		}
-
-		public int getY() {
-			return y;
-		}
-	}
+	private static final Coordinate boulder = new Coordinate(1, 2);
 
 	private Coordinate coordinate = new Coordinate(0, 0);
 	private String direction = NORTH;
@@ -42,7 +26,7 @@ public class Rover {
 					break;
 
 				case 'f':
-					moveForward();
+					doMoveIfPossible();
 					break;
 
 				case 'r':
@@ -54,41 +38,100 @@ public class Rover {
 		return formattedStatus();
 	}
 
-	private void moveForward() {
+	private void doMoveIfPossible() {
+		if (isMovePossible()) {
+			doMove();
+		}
+	}
+
+	private boolean isMovePossible() {
+		Coordinate target;
 		switch (direction) {
 		case NORTH:
-			if (coordinate.getY() + 1 > 4) {
-				coordinate = new Coordinate(coordinate.getX(), 0);
-			} else {
-				coordinate = new Coordinate(coordinate.getX(), coordinate.getY() + 1);
-			}
+			target = nextNorthernCoordinate();
 			break;
 
 		case EAST:
-			if (coordinate.getX() + 1 > 4) {
-				coordinate = new Coordinate(0, coordinate.getY());
-			} else {
-				coordinate = new Coordinate(coordinate.getX() + 1, coordinate.getY());
-			}
+			target = nextEasternCoordinate();
 			break;
 
 		case SOUTH:
-			if (coordinate.getY() - 1 < 0) {
-				coordinate = new Coordinate(coordinate.getX(), 4);
-			} else {
-				coordinate = new Coordinate(coordinate.getX(), coordinate.getY() - 1);
-			}
+			target = nextSouthernCoordinate();
 			break;
 
 		case WEST:
-			if (coordinate.getX() - 1 < 0) {
-				coordinate = new Coordinate(4, coordinate.getY());
-			} else {
-				coordinate = new Coordinate(coordinate.getX() - 1, coordinate.getY());
-			}
+			target = nextWesternCoordinate();
 			break;
-		}
 
+		default:
+			target = null;
+		}
+		return !target.equals(boulder);
+	}
+
+	private void doMove() {
+		Coordinate target;
+		switch (direction) {
+		case NORTH:
+			target = nextNorthernCoordinate();
+			break;
+
+		case EAST:
+			target = nextEasternCoordinate();
+			break;
+
+		case SOUTH:
+			target = nextSouthernCoordinate();
+			break;
+
+		case WEST:
+			target = nextWesternCoordinate();
+			break;
+
+		default:
+			target = null;
+		}
+		coordinate = target;
+	}
+
+	private Coordinate nextNorthernCoordinate() {
+		Coordinate target;
+		if (coordinate.getY() + 1 > 4) {
+			target = new Coordinate(coordinate.getX(), 0);
+		} else {
+			target = new Coordinate(coordinate.getX(), coordinate.getY() + 1);
+		}
+		return target;
+	}
+
+	private Coordinate nextWesternCoordinate() {
+		Coordinate target;
+		if (coordinate.getX() - 1 < 0) {
+			target = new Coordinate(4, coordinate.getY());
+		} else {
+			target = new Coordinate(coordinate.getX() - 1, coordinate.getY());
+		}
+		return target;
+	}
+
+	private Coordinate nextSouthernCoordinate() {
+		Coordinate target;
+		if (coordinate.getY() - 1 < 0) {
+			target = new Coordinate(coordinate.getX(), 4);
+		} else {
+			target = new Coordinate(coordinate.getX(), coordinate.getY() - 1);
+		}
+		return target;
+	}
+
+	private Coordinate nextEasternCoordinate() {
+		Coordinate target;
+		if (coordinate.getX() + 1 > 4) {
+			target = new Coordinate(0, coordinate.getY());
+		} else {
+			target = new Coordinate(coordinate.getX() + 1, coordinate.getY());
+		}
+		return target;
 	}
 
 	private void rotateLeft() {

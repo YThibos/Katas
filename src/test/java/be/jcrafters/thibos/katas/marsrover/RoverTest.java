@@ -79,4 +79,11 @@ public class RoverTest {
 
 		assertThat(actualResult).isEqualTo(expectedResult);
 	}
+
+	@Test
+	void whenNewRover_givenCommandsToDriveUpTox1y2_thenShouldBumpIntoImaginaryObstacle() {
+		String result = rover.executeCommands("rflff");
+
+		assertThat(result).isEqualTo("1:1:N");
+	}
 }
