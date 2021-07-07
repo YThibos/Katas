@@ -32,4 +32,14 @@ public class RoverTest {
 
 		assertThat(result).isEqualTo("0:0:W");
 	}
+
+	@Test
+	void whenNewRover_getsNoCommands_shouldReturnCorrectOrientation() {
+		Rover rover = new Rover();
+
+		String result = rover.executeCommands("");
+
+		assertThat(result).isEqualTo("0:0:N");
+	}
+
 }
