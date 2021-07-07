@@ -1,27 +1,50 @@
 package be.jcrafters.thibos.katas.marsrover;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class Rover {
 
-	private String position = "0:0:N";
+	private static final String NORTH = "N";
+	private static final String WEST = "W";
+	private static final String EAST = "E";
+	private static final String SOUTH = "S";
+	private String position = "0:0";
+	private String direction = NORTH;
 
 	public String executeCommands(String commands) {
 
-		if (isBlank(commands)) {
-			return position;
+		if (isNotBlank(commands)) {
+
+			switch (commands) {
+			case "l":
+				if (direction.equals(NORTH)) {
+					direction = WEST;
+				}
+				break;
+
+			case "f":
+				position = "1:0";
+				break;
+
+			case "r":
+				if (NORTH.equals(direction)) {
+					direction = EAST;
+				} else if (EAST.equals(direction)) {
+					direction = SOUTH;
+				}
+				break;
+
+			case "rr":
+				direction = SOUTH;
+				break;
+
+			case "rrr":
+				direction = WEST;
+				break;
+			}
 		}
 
-		switch (commands) {
-		case "r":
-			return "0:0:E";
-		case "rr":
-			return "0:0:S";
-		case "f":
-			return "1:0:N";
-		default:
-			return "0:0:W";
-		}
+		return position + ":" + direction;
 	}
 
 }

@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class RoverTest {
 
@@ -55,4 +57,24 @@ public class RoverTest {
 
 		assertThat(result).isEqualTo("1:0:N");
 	}
+
+	@ParameterizedTest
+	@CsvSource({"r, 0:0:E",
+				"rr, 0:0:S",
+				"rrr, 0:0:W",
+				"rrrr, 0:0:N"})
+	void whenNewRover_rotateRight_variousNumberOfRotations(String commands, String expectedResult) {
+		String actualResult = rover.executeCommands(commands);
+
+		assertThat(actualResult).isEqualTo(expectedResult);
+	}
+
+	@Test
+	void whenNewRover_rotatesRightTwice_shouldReturnCorrectOrientation() {
+		rover.executeCommands("r");
+		String result = rover.executeCommands("r");
+
+		assertThat(result).isEqualTo("0:0:S");
+	}
+
 }
