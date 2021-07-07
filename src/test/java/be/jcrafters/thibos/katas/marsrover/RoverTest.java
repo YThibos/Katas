@@ -17,10 +17,10 @@ public class RoverTest {
 	}
 
 	@Test
-	void whenNewRover_rotateLeft_shouldReturnCorrectOrientation() {
-		String result = rover.executeCommands("l");
+	void whenNewRover_getsNullCommand_shouldDoNothing() {
+		String result = rover.executeCommands(null);
 
-		assertThat(result).isEqualTo("0:0:W");
+		assertThat(result).isEqualTo("0:0:N");
 	}
 
 	@Test
@@ -31,17 +31,23 @@ public class RoverTest {
 	}
 
 	@Test
-	void whenNewRover_getsNullCommand_shouldDoNothing() {
-		String result = rover.executeCommands(null);
-
-		assertThat(result).isEqualTo("0:0:N");
-	}
-
-	@Test
 	void whenNewRover_moveForward_shouldReturnCorrectCoordinates() {
 		String result = rover.executeCommands("f");
 
 		assertThat(result).isEqualTo("1:0:N");
+	}
+
+	@ParameterizedTest
+	@CsvSource({"l, 0:0:W",
+				"ll, 0:0:S",
+				"lll, 0:0:E",
+				"llll, 0:0:N",
+				"lllll, 0:0:W"
+			   })
+	void whenNewRover_rotateLeft_shouldReturnCorrectOrientation(String commands, String expectedResult) {
+		String result = rover.executeCommands(commands);
+
+		assertThat(result).isEqualTo(expectedResult);
 	}
 
 	@ParameterizedTest
