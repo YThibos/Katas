@@ -8,9 +8,26 @@ public class Rover {
 	private static final String WEST = "W";
 	private static final String EAST = "E";
 	private static final String SOUTH = "S";
-	private int x = 0;
-	private int y = 0;
 
+	private static class Coordinate {
+		private final int x;
+		private final int y;
+
+		public Coordinate(int x, int y) {
+			this.x = x;
+			this.y = y;
+		}
+
+		public int getX() {
+			return x;
+		}
+
+		public int getY() {
+			return y;
+		}
+	}
+
+	private Coordinate coordinate = new Coordinate(0, 0);
 	private String direction = NORTH;
 
 	public String executeCommands(String commands) {
@@ -25,7 +42,7 @@ public class Rover {
 					break;
 
 				case 'f':
-					x = ++x;
+					moveForward();
 					break;
 
 				case 'r':
@@ -37,8 +54,12 @@ public class Rover {
 		return formattedStatus();
 	}
 
-	private String formattedStatus() {
-		return x + ":" + y + ":" + direction;
+	private void moveForward() {
+		if (coordinate.getY() + 1 > 4) {
+			coordinate = new Coordinate(coordinate.getX(), 0);
+		} else {
+			coordinate = new Coordinate(coordinate.getX(), coordinate.getY() + 1);
+		}
 	}
 
 	private void rotateLeft() {
@@ -63,5 +84,9 @@ public class Rover {
 		} else if (WEST.equals(direction)) {
 			direction = NORTH;
 		}
+	}
+
+	private String formattedStatus() {
+		return coordinate.getX() + ":" + coordinate.getY() + ":" + direction;
 	}
 }
