@@ -19,9 +19,7 @@ public class Rover {
 
 				switch (command) {
 				case 'l':
-					if (direction.equals(NORTH)) {
-						direction = WEST;
-					}
+					rotateLeft();
 					break;
 
 				case 'f':
@@ -29,21 +27,35 @@ public class Rover {
 					break;
 
 				case 'r':
-
-					if (NORTH.equals(direction)) {
-						direction = EAST;
-					} else if (EAST.equals(direction)) {
-						direction = SOUTH;
-					} else if (SOUTH.equals(direction)) {
-						direction = WEST;
-					} else if (WEST.equals(direction)) {
-						direction = NORTH;
-					}
+					rotateRight();
 					break;
-
 				}
 			}
 		}
 		return position + ":" + direction;
+	}
+
+	private void rotateLeft() {
+		if (NORTH.equals(direction)) {
+			direction = WEST;
+		} else if (WEST.equals(direction)) {
+			direction = SOUTH;
+		} else if (SOUTH.equals(direction)) {
+			direction = EAST;
+		} else if (EAST.equals(direction)) {
+			direction = NORTH;
+		}
+	}
+
+	private void rotateRight() {
+		if (NORTH.equals(direction)) {
+			direction = EAST;
+		} else if (EAST.equals(direction)) {
+			direction = SOUTH;
+		} else if (SOUTH.equals(direction)) {
+			direction = WEST;
+		} else if (WEST.equals(direction)) {
+			direction = NORTH;
+		}
 	}
 }
