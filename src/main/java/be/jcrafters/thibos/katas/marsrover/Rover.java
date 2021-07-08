@@ -66,6 +66,7 @@ public class Rover {
 		default:
 			target = null;
 		}
+
 		return !target.equals(boulder);
 	}
 
